@@ -1,11 +1,11 @@
 // Selecciones
-const graf = d3.select("#graf")
+const grafAsalariados = d3.select("#grafAsalariados")
 const cboRangoAnios = d3.select("#cboRangoAnios")
 
 // Dimensiones
-const anchoTotal = +graf.style("width").slice(0, -2)
+const anchoTotal = +grafAsalariados.style("width").slice(0, -2)
 console.log(anchoTotal)
-const altoTotal = (anchoTotal * 9) / 16
+const altoTotal = (anchoTotal * 9) / 20
 console.log(altoTotal)
 
 const margins = {
@@ -18,11 +18,11 @@ const ancho = anchoTotal - margins.left - margins.right
 const alto = altoTotal - margins.top - margins.bottom
 
 // Elementos gráficos (layers)
-const svg = graf
+const svg = grafAsalariados
   .append("svg")
   .attr("width", anchoTotal)
   .attr("height", altoTotal)
-  .attr("class", "graf")
+  .attr("class", "grafAsalariados")
 
 const layer = svg
   .append("g")
@@ -32,7 +32,7 @@ layer
   .append("rect")
   .attr("height", alto)
   .attr("width", ancho)
-  .attr("fill", "#bedfdc")
+  .attr("fill", "white")
 
 const g = svg
   .append("g")
