@@ -1,6 +1,6 @@
 // Selecciones
 const graf = d3.select("#graf")
-const metrica = d3.select("#metrica")
+const cboRangoAnios = d3.select("#cboRangoAnios")
 
 // Dimensiones
 const anchoTotal = +graf.style("width").slice(0, -2)
@@ -32,7 +32,7 @@ layer
   .append("rect")
   .attr("height", alto)
   .attr("width", ancho)
-  .attr("fill", "white")
+  .attr("fill", "#bedfdc")
 
 const g = svg
   .append("g")
@@ -40,11 +40,11 @@ const g = svg
 
 //!!-----------------------------------------------------
 
-const draw = async (variable = "De16a24anios") => {
+const draw = async (variable = "De 16 a 24 anios") => {
   // Carga de Datos
   data = await d3.csv("input/porcentaje_de_asalariados_con_contratos_temporales_por_edad.csv", d3.autoType)
 
-  metrica
+  cboRangoAnios
     .selectAll("option")
     .data(Object.keys(data[0]).slice(1))
     .enter()
@@ -81,7 +81,6 @@ const draw = async (variable = "De16a24anios") => {
   const render = (variable) => {
     // Accesores
     const yAccessor = (d) => d[variable]
-    data.sort((a, b) => yAccessor(b) - yAccessor(a))
 
     // Escaladores
     y.domain([0, d3.max(data, yAccessor)])
@@ -105,7 +104,7 @@ const draw = async (variable = "De16a24anios") => {
       .attr("width", x.bandwidth())
       .attr("height", (d) => alto - y(yAccessor(d)))
       .attr("fill", (d) =>
-        xAccessor(d) == "2018" ? "#f00" : color(variable)
+        xAccessor(d) == "2018" ? "yellow" : color(variable)
       )
 
     const et = etiquetas.selectAll("text").data(data)
@@ -120,19 +119,8 @@ const draw = async (variable = "De16a24anios") => {
       .attr("y", (d) => y(yAccessor(d)))
       .text(yAccessor)
 
-    d3.select("#graf")
-      .on("mouseover", function () {
-        return tooltip.style("visibility", "visible");
-      })
-      .on("mousemove", function () {
-        return tooltip.style("top", (event.pageY - 800) + "px").style("left", (event.pageX - 800) + "px");
-      })
-      .on("mouseout", function () {
-        return tooltip.style("visibility", "hidden");
-      });
-
     // Títulos
-    titulo.text(`En el rango ${variable} a través de los años`)
+    titulo.text(`En el rango: ${variable} `)
 
     // Ejes
     const xAxis = d3.axisBottom(x)
@@ -142,7 +130,7 @@ const draw = async (variable = "De16a24anios") => {
   }
 
   // Eventos
-  metrica.on("change", (e) => {
+  cboRangoAnios.on("change", (e) => {
     e.preventDefault()
     render(e.target.value)
   })
