@@ -23,3 +23,9 @@
     stroke: #000;
     shape-rendering: crispEdges;
 }
+
+.cboRangoAnios {
+    width: 200px;
+    position: relative;
+    font-family: Arial;
+}
