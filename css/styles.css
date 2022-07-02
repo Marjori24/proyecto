@@ -1,5 +1,12 @@
-.graf {
-    background-color: #bedfdc;
+.titulo {
+    text-align:center;
+    font-family: Georgia, serif;
+    font-size: 60px;
+    color: white;
+    background-color: black;
+}
+
+.grafAsalariados {
     border: 1px solid #6b9080;
 }
 
