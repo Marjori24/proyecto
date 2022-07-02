@@ -36,3 +36,13 @@
     position: relative;
     font-family: Arial;
 }
+
+text {
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 18px;
+    color: rgb(7, 36, 99);
+}
+
+.etiquetaBarra {
+    padding-bottom: 30px;
+}
